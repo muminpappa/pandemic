@@ -1,4 +1,22 @@
-# Summary
+# Abstract
+
+Covid-19 is around. In order to limit the damage, countries all over the world are restricting public life.  
+
+This is how we are told today to behave - because we ignore who is vulnerable and who probably not:
+
+| meeting situation | vulnerable    | non-vulnerable  |
+|-----------------|:-------------:|:---------------:|
+| vulnerable      | keep distance | keep distance   |
+| non-vulnerable  | keep distance | keep distance   |
+
+Imagine we could behave **like this** instead:
+
+|                 | vulnerable    | non-vulnerable  |
+|-----------------|:-------------:|:---------------:|
+| vulnerable      | keep distance | keep distance   |
+| non-vulnerable  | keep distance | **hug and kiss**    |
+
+I wanted to find out how this would change something; below is my story and the resulting model.
 
 # The Problem
 The current Covid-19 pandemic is one of the biggest challenges the world has seen during the last century. 
@@ -56,18 +74,22 @@ In order to check the hypothesis I have written a small simulation model that co
 # A Model to Compare Scenarios
 
 ## General
-The model is written in Python. I'm a physicist so that explains the coding style ;-)
-20 years back I worked a lot with computational physics, in particular Monte Carlo modeling, 
+The model is written in Python. I'm a physicist which explains the coding style ;-)
+20 years back I was pretty much in computational physics, in particular Monte Carlo (MC) modeling, 
 and that is the approach I have chosen here as well.
-Basically, I create a population that consists of _n_ individuals with a number of properties. 
+
+There is a `requirements.txt` file that you can use with `pip` to prepare a virtual environment.
+
+I tried to keep it as simple as possible.
+One nice thing about MC models of that type is that you can easily extend them if needed. 
+
+Basically, I create a `population` that consists of _n_ `individual`s with a number of properties. 
 The simulation itself is initialized and runs for a certain number of time steps.
 I use matplotlib.pyplot for the visualization, but this is optional.
 
 ## Class for Individuals
 
 ## Class for Population
-
-## Main
 
 # Results
 
