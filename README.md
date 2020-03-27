@@ -6,15 +6,15 @@ This is how we are told today to behave - because we ignore who is vulnerable an
 
 | meeting situation | vulnerable    | non-vulnerable  |
 |-----------------|:-------------:|:---------------:|
-| vulnerable      | keep distance | keep distance   |
-| non-vulnerable  | keep distance | keep distance   |
+| **vulnerable**      | keep distance | keep distance   |
+| **non-vulnerable**  | keep distance | keep distance   |
 
 Imagine we could behave **like this** instead:
 
-|                 | vulnerable    | non-vulnerable  |
+| meeting situation | vulnerable    | non-vulnerable  |
 |-----------------|:-------------:|:---------------:|
-| vulnerable      | keep distance | keep distance   |
-| non-vulnerable  | keep distance | **hug and kiss**    |
+| **vulnerable**      | keep distance | keep distance   |
+| **non-vulnerable**  | keep distance | **hug and kiss**    |
 
 I wanted to find out how this would change something; below is my story and the resulting model.
 
@@ -85,9 +85,20 @@ One nice thing about MC models of that type is that you can easily extend them i
 
 Basically, I create a `population` that consists of _n_ `individual`s with a number of properties. 
 The simulation itself is initialized and runs for a certain number of time steps.
+
 I use matplotlib.pyplot for the visualization, but this is optional.
 
 ## Class for Individuals
+
+An infected individual will go through different phases: 
+@startuml
+actor client
+node app
+database db
+
+db -> app
+app -> client
+@enduml
 
 ## Class for Population
 
