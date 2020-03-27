@@ -86,22 +86,108 @@ One nice thing about MC models of that type is that you can easily extend them i
 Basically, I create a `population` that consists of _n_ `individual`s with a number of properties. 
 The simulation itself is initialized and runs for a certain number of time steps.
 
-I use matplotlib.pyplot for the visualization, but this is optional.
+There are a number of global variables (...) defined that characterize the simulation.
+These can become a `simulation` class later on.  
+
+I use `matplotlib.pyplot` for the visualization, but this is optional.
 
 ## Class for Individuals
 
-An infected individual will go through different phases: 
-@startuml
-actor client
-node app
-database db
-
-db -> app
-app -> client
-@enduml
+The constructor takes one argument, which is the `weakness` of the individual.
+If this weakness is lower than a predefined threshold, the individual is considered to be vulnerable.
+This allows for a initialization of the individual with a random number so that a certain fraction of the population becomes vulnerable. 
+ 
+The class has two further methods: `age()` and `infect()`.
+Once infected, an individual will go through different phases: 
+* infected
+* infectious
+* has symptoms
+* immune (i.e. healthy and no longer infectious)
+This happens during ageing by increasing the infected value by one in each time step,
+and changing the other properties depending on the global variables for the simulation.
 
 ## Class for Population
 
+The constructor takes one argument, which is the `size` of the population, 
+and creates a list of individuals.
+
+The `age()` method simply ages the list of individuals.
+
+The `meet()` method simulates a meeting of two random sub-groups of the population. I know, very dirty. 
+They meet in pairs and try to infect each other.
+
+The `try_infect()` method contains the logic of the model, basically what is shown in the table in the abstract.
+There is a transmission likelyhood for meetings between non-vulnerable individuals
+(as they are expected to hug and kiss, it is typically high, say 1), and another one for all other meetings. 
+
+Finally, the `statistics()` methods returns a list of statistics for the current state of population.
+What would you get if you could test the population of your country several times each day?   
+
 # Results
+
+Below an example for how the results look like. Time steps are arbitrary units. 
+![](includes/Figure_2.png "Simulation example, reference scenario")
+
+This is what was simulated:
+```python
+"fraction of the population that is considered vulnerable"
+vulnerable_fraction = 0.05
+
+"time steps after infection"
+"- before showing symptoms"
+symptom_age = 50
+"- before being infectious"
+infectious_age = 20
+"- before being immune and no longer infectious"
+immune_age = 80
+
+"transmission likelihood during meeting"
+"- involving vulnerable individual"
+transmission_likelyhood_1 = 0.05
+"- between non-vulnerable individuals"
+transmission_likelyhood_2 = 0.05
+
+"size of population"
+size_of_population = 1000
+"pairs of people meeting in each time step"
+fraction_of_pairs = 0.5
+number_of_pairs = int(size_of_population*fraction_of_pairs)
+
+"number of time steps to simulate"
+number_of_steps = 500
+```
+
+
+Below an example for the results when assuming 100% transmission of the disease between the non-vulnerable individuals. 
+![](includes/Figure_1.png "Simulation example")
+
+This is what was simulated:
+```python
+"fraction of the population that is considered vulnerable"
+vulnerable_fraction = 0.05
+
+"time steps after infection"
+"- before showing symptoms"
+symptom_age = 50
+"- before being infectious"
+infectious_age = 20
+"- before being immune and no longer infectious"
+immune_age = 80
+
+"transmission likelihood during meeting"
+"- involving vulnerable individual"
+transmission_likelyhood_1 = 0.05
+"- between non-vulnerable individuals"
+transmission_likelyhood_2 = 1
+
+"size of population"
+size_of_population = 1000
+"pairs of people meeting in each time step"
+fraction_of_pairs = 0.5
+number_of_pairs = int(size_of_population*fraction_of_pairs)
+
+"number of time steps to simulate"
+number_of_steps = 500
+```
 
 # Summary

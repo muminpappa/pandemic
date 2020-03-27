@@ -16,7 +16,7 @@ immune_age = 80
 
 "transmission likelihood during meeting"
 "- involving vulnerable individual"
-transmission_likelyhood_1 = 0.01
+transmission_likelyhood_1 = 0.05
 "- between non-vulnerable individuals"
 transmission_likelyhood_2 = 1
 
@@ -108,8 +108,6 @@ for i in range(number_of_steps):
     result.append(p.statistics())
 
 a = np.array(result)
-
-print("Peak intensive care: {:.2%}".format(max(a[:,4])))
 
 plt.plot(a[:,1:])
 plt.legend(["infected", "infectious", "has_symptoms", "intensive_care", "immune", "dead"])
