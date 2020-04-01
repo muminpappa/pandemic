@@ -122,10 +122,12 @@ There is a transmission likelyhood for meetings between non-vulnerable individua
 
 Finally, the `statistics()` methods returns a list of statistics for the current state of population.
 What would you get if you could test the population of your country several times each day?   
+When calculating the fraction of individuals needing intensive care,
+it is assumed that every vulnerable individual needs intensive care once the individual has symptoms.   
 
 # Results
 
-Below an example for how the results look like. Time steps are arbitrary units. 
+Below an example for how the results look like for the reference scenario (keep distance between all). Time steps are arbitrary units. 
 ![](includes/Figure_2.png "Simulation example, reference scenario")
 
 This is what was simulated:
