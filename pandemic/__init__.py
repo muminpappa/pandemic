@@ -1,7 +1,5 @@
 """"Simulation to compare infection scenarios"""
 import random
-import matplotlib.pyplot as plt
-import numpy as np
 
 "fraction of the population that is considered vulnerable"
 vulnerable_fraction = 0.05
@@ -97,23 +95,3 @@ class population:
             fraction_immune += (1 if (self.data[i].immune and not self.data[i].vulnerable) else 0)/len(self.data)
             fraction_dead += (1 if (self.data[i].immune and self.data[i].vulnerable) else 0)/len(self.data)
         return[i,fraction_infected, fraction_infectious, fraction_has_symptoms, fraction_intensive_care, fraction_immune, fraction_dead]
-
-
-p = population(size_of_population)
-result = []
-
-for i in range(number_of_steps):
-    p.meet()
-    p.age()
-    result.append(p.statistics())
-
-a = np.array(result)
-
-plt.plot(a[:,1:])
-plt.legend(["infected", "infectious", "has_symptoms", "intensive_care", "immune", "dead"])
-plt.title("Peak intensive care: {:.2%}".format(max(a[:,4])))
-plt.show()
-
-
-
-
